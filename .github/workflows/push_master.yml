@@ -1,0 +1,84 @@
+name: Chack code and publish on master push
+
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "*.py"
+  
+jobs:
+  check:
+    name: Code check 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    - name: Analysing the code with pylint
+      run: pylint --exit-zero $(git ls-files '*.py')
+  publish:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+        versionSpec: 5.x
+    - name: Determine Version
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      id: gitversion
+      with:
+        useConfigFile: true
+        configFilePath: ./.github/config/gitversion.yml
+    - name: Create zip
+      uses: ihiroky/archive-action@v1
+      with:
+        root_dir: ./
+        file_path: ipsec_exporter_${{steps.gitversion.outputs.version}}.zip
+    - name: Create tar.gz
+      uses: ihiroky/archive-action@v1
+      with:
+        root_dir: ./
+        file_path: ipsec_exporter_${{steps.gitversion.outputs.version}}.tar.gz
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{steps.gitversion.outputs.version}}
+        release_name: ${{steps.gitversion.outputs.version}}
+        body_path: ./RELEASE.md
+        draft: false
+        prerelease: false
+    - name: Upload zip archive
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./ipsec_exporter_${{steps.gitversion.outputs.version}}.zip
+        asset_name: ipsec_exporter_${{steps.gitversion.outputs.version}}.zip
+        asset_content_type: application/zip
+    - name: Upload tar.gz archive
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./ipsec_exporter_${{steps.gitversion.outputs.version}}.tar.gz
+        asset_name: ipsec_exporter_${{steps.gitversion.outputs.version}}.tar.gz
+        asset_content_type: application/gzip
+    
