@@ -1,6 +1,6 @@
 import prometheus_client
 import time
-from src.metrics_source import *
+from src.metrics_source import MetricsSource
 
 
 
