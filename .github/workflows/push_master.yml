@@ -1,4 +1,4 @@
-name: Chack code and publish on master push
+name: Check code and publish on master push
 
 on:
   push:
@@ -41,11 +41,12 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: nuget
+        name: src
         path: |
           ./
           !./.github/
           !./.gitignore
+          !./.git/
     outputs: 
       version: ${{ steps.gitversion.outputs.SemVer }}
   publish:
@@ -56,7 +57,7 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: nuget
+        name: src
         path: ./
     - name: Create zip
       uses: ihiroky/archive-action@v1
