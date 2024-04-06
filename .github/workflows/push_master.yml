@@ -49,6 +49,7 @@ jobs:
     outputs: 
       version: ${{ steps.gitversion.outputs.SemVer }}
   publish:
+    name: Publish
     needs: check
     runs-on: ubuntu-latest
     steps:
@@ -61,20 +62,20 @@ jobs:
       uses: ihiroky/archive-action@v1
       with:
         root_dir: ./
-        file_path: ipsec_exporter_${{needs.build.outputs.version}}.zip
+        file_path: ipsec_exporter_${{ needs.build.outputs.version }}.zip
     - name: Create tar.gz
       uses: ihiroky/archive-action@v1
       with:
         root_dir: ./
-        file_path: ipsec_exporter_${{needs.build.outputs.version}}.tar.gz
+        file_path: ipsec_exporter_${{ needs.build.outputs.version }}.tar.gz
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{needs.build.outputs.version}}
-        release_name: ${{needs.build.outputs.version}}
+        tag_name: ${{ needs.build.outputs.version }}
+        release_name: ${{ needs.build.outputs.version }}
         body_path: ./RELEASE.md
         draft: false
         prerelease: false
@@ -84,8 +85,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./ipsec_exporter_${{needs.build.outputs.version}}.zip
-        asset_name: ipsec_exporter_${{needs.build.outputs.version}}.zip
+        asset_path: ./ipsec_exporter_${{ needs.build.outputs.version }}.zip
+        asset_name: ipsec_exporter_${{ needs.build.outputs.version }}.zip
         asset_content_type: application/zip
     - name: Upload tar.gz archive
       uses: actions/upload-release-asset@v1
@@ -93,7 +94,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./ipsec_exporter_${{needs.build.outputs.version}}.tar.gz
-        asset_name: ipsec_exporter_${{needs.build.outputs.version}}.tar.gz
+        asset_path: ./ipsec_exporter_${{ needs.build.outputs.version }}.tar.gz
+        asset_name: ipsec_exporter_${{ needs.build.outputs.version }}.tar.gz
         asset_content_type: application/gzip
     
