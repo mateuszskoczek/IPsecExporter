@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from prometheus_client import *
+from prometheus_client import Gauge
 from re import Pattern
 import re
 import os
