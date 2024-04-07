@@ -58,16 +58,16 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: src
-        path: ./
+        path: ./data/
     - name: Create zip
       uses: ihiroky/archive-action@v1
       with:
-        root_dir: ./
+        root_dir: ./data/
         file_path: ipsec_exporter_${{ needs.check.outputs.version }}.zip
     - name: Create tar.gz
       uses: ihiroky/archive-action@v1
       with:
-        root_dir: ./
+        root_dir: ./data/
         file_path: ipsec_exporter_${{ needs.check.outputs.version }}.tar.gz
     - name: Create Release
       id: create_release
