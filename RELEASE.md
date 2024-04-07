@@ -1,3 +1,3 @@
 # Changelog
 
-- Initial version
+- Error fix
