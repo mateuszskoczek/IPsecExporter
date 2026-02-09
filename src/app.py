@@ -1,7 +1,7 @@
 from argparse import *
-from src.prometheus_metrics_server import *
-from src.metrics_source import *
-from src.metric import *
+from prometheus_metrics_server import *
+from metrics_source import *
+from metric import *
 
 class App:
     args: Namespace

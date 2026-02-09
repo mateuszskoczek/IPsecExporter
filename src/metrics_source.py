@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.metric import Metric, CommandMetric, CustomMetric
+from metric import Metric, CommandMetric, CustomMetric
 import os
 
 

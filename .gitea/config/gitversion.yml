@@ -1,11 +1,9 @@
 next-version: 1.0.0
+mode: ContinuousDeployment
 assembly-versioning-scheme: MajorMinorPatch
 assembly-file-versioning-scheme: MajorMinorPatch
 
 branches:
-  master:
-    regex: ^master$
-    mode: ContinuousDelivery
+  main:
+    regex: ^main$
     increment: Patch
-    tag: ''
-    is-release-branch: true
