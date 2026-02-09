@@ -8,7 +8,7 @@
 
 ---
 
-## Support status
+## Informations
 
 > [!Warning]  
 > App is no longer maintained. Last time, it was updated on April 2024. There is no guarantee that it works with newer versions of Libreswan. I leave the repository mainly as a sample of my work.
