@@ -5,7 +5,6 @@ import os
 from prometheus_client import Gauge
 
 
-
 class Metric:
     gauge: Gauge
 
