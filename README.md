@@ -4,7 +4,7 @@
 
 <h3 align="center"><b>Metrics exporter for Libreswan IPsec VPN for use with Prometheus and Grafana</b></h3>
 
-<p align="center">Metrics exporter written in Python for IPsec VPN server set up with <a href="https://github.com/hwdsl2/setup-ipsec-vpn">this scripts</a> (probably works with any Libreswan IPsec server).</p>
+<p align="center">Metrics exporter written in Python for IPsec VPN server set up with <a href="https://github.com/hwdsl2/setup-ipsec-vpn">these scripts</a> (probably works with any Libreswan IPsec server).</p>
 
 ---
 
