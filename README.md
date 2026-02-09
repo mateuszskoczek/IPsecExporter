@@ -100,4 +100,6 @@ Exporter will extract all metrics from command output, basing on regular express
 
 You can copy this repository and create your own version of the app freely. However, it would be nice if you included URL to this repository in the description to your repository or in README file.
 
+**Other sources:**
+
 - Icon by <a href="icons8.com">Icons8</a>
