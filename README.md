@@ -10,6 +10,10 @@
 
 ## Informations
 
+> [!Info]
+> For Github users:
+> This is only mirror repository. All changes are first uploaded to the repository <a href="https://repos.mateuszskoczek.com/MateuszSkoczek/IPsecExporter">here</a>. Releases are also published on original repository. However, Github repository handles issues for more accessibility.
+
 > [!Warning]  
 > App is no longer maintained. Last time, it was updated on April 2024. There is no guarantee that it works with newer versions of Libreswan. I leave the repository mainly as a sample of my work.
 
