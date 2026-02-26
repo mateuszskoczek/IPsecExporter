@@ -14,6 +14,7 @@ on:
 jobs:
   analyze:
     name: Analyze code
+    runs-on: linux
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -30,6 +31,7 @@ jobs:
         run: pylint --exit-zero $(git ls-files 'src/*.py')
   publish:
     name: Publish script
+    runs-on: linux
     needs: analyze
     steps:
       - name: Checkout
